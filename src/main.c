@@ -3,6 +3,7 @@
 #include <string.h>
 #include <errno.h>
 #include <limits.h>
+#include "image.h"
 
 typedef struct {
     int linha;
@@ -148,9 +149,10 @@ int lerLinha(char *entrada, int capacidade) {
 }
 
 int main(void) {
-    char entrada[128];
+    Image imagem = {0, 0, NULL};
+    char entrada[1024];
     for (;;) {
-        printf("\nFlood Fill\n1 - Executar com pilha\n2 - Executar com fila\n3 - Escolher imagem\n4 - Escolher coordenada\n5 - Demonstrar pilha e fila\n0 - Encerrar\nOpcao: ");
+        printf("\nFlood Fill\n1 - Executar com pilha\n2 - Executar com fila\n3 - Escolher imagem\n4 - Escolher coordenada\n5 - Demonstrar pilha e fila\n6 - Salvar copia da imagem\n0 - Encerrar\nOpcao: ");
         if (!lerLinha(entrada, sizeof entrada)) {
             break;
         }
@@ -174,11 +176,30 @@ int main(void) {
         }
         if (opcao == 5) {
             demonstrarEstruturas();
+        } else if (opcao == 3) {
+            printf("Caminho da imagem BMP (sem aspas): ");
+            if (!lerLinha(entrada, sizeof entrada)) {
+                break;
+            }
+            if (abrirBMP(entrada, &imagem)) {
+                printf("Imagem carregada: %d x %d pixels.\n", imagem.largura, imagem.altura);
+            }
+        } else if (opcao == 6) {
+            if (imagem.pixels == NULL) {
+                puts("Escolha uma imagem primeiro pela opcao 3.");
+                continue;
+            }
+            printf("Caminho da copia BMP (use outro nome): ");
+            if (!lerLinha(entrada, sizeof entrada)) {
+                break;
+            }
+            puts(salvarBMP(entrada, &imagem) ? "Copia salva." : "Nao foi possivel salvar a copia.");
         } else if (opcao >= 1 && opcao <= 4) {
             puts("Funcionalidade ainda em desenvolvimento.");
         } else {
             puts("Opcao invalida.");
         }
     }
+    liberarImagem(&imagem);
     return EXIT_SUCCESS;
 }
