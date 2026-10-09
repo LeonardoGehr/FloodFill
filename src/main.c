@@ -186,7 +186,6 @@ void executarFloodFill(const Image *original, Position inicio, Color novaCor, in
     Queue fila = {NULL, NULL};
     size_t pintados = 0;
     size_t etapa = 0;
-    /* Pequenas imagens: cada pixel. Grandes: cerca de 100 quadros. */
     size_t intervalo = quantidade > 100 ? quantidade / 100 : 1;
     int sucesso = salvarBMP(caminho, original);
     if (sucesso) {

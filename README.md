@@ -8,7 +8,7 @@ Menu no terminal e estruturas proprias de pilha e fila encadeadas, armazenando c
 
 ## Compilar e executar
 
-Com GCC instalado, a partir desta pasta:
+Com GCC instalado (C11), sem bibliotecas externas, a partir desta pasta:
 
     gcc -std=c11 -Wall -Wextra -Wpedantic src/main.c src/image.c -o programa.exe
     .\programa.exe
@@ -35,7 +35,9 @@ No MSYS2 UCRT64, executar ./programa.exe.
 
 ## Referencias e apoio
 
-Formato BMP: https://learn.microsoft.com/en-us/windows/win32/api/wingdi/ns-wingdi-bitmapinfoheader
+- Enunciado da atividade: TDE_2_ED_14h_v1.1.pdf e orientacoes do AVA.
+- Formato BMP: BITMAPINFOHEADER - Microsoft Learn (https://learn.microsoft.com/en-us/windows/win32/api/wingdi/ns-wingdi-bitmapinfoheader).
+- Desenvolvimento realizado com apoio de IA para planejamento e revisao.
 
 ## Executar o preenchimento
 
@@ -52,3 +54,8 @@ Formato BMP: https://learn.microsoft.com/en-us/windows/win32/api/wingdi/ns-wingd
 O algoritmo retira uma posicao, verifica limites e cor, pinta e insere cima, baixo, esquerda e direita. A nova cor marca a visita; nao utiliza recursao nem lista de visitados. Cada execucao trabalha sobre uma copia e usa uma pasta nova, sem sobrescrever execucoes anteriores. A escolha de nova imagem exige selecionar novamente a coordenada.
 
 Sao salvas a imagem original, etapas numeradas e a imagem final. Ate 100 pixels, cada pixel pintado gera um quadro; para imagens maiores, o intervalo e max(1, quantidade total de pixels / 100), salvando tambem o primeiro pixel. As pastas geradas sao excluidas do Git; a imagem usada nos testes e incluida. Se houver erro de memoria ou gravacao, a execucao e interrompida, liberando a memoria, e a pasta pode conter resultados parciais.
+
+## Documentacao complementar consultada na revisao
+
+- BITMAPFILEHEADER - Microsoft Learn (https://learn.microsoft.com/en-us/windows/win32/api/wingdi/ns-wingdi-bitmapfileheader)
+- malloc - Microsoft Learn (https://learn.microsoft.com/en-us/cpp/c-runtime-library/reference/malloc)
